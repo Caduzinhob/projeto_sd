@@ -2,6 +2,9 @@ import { Controller, Get, UseGuards, Req, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from '@nestjs/passport';
 import * as jwt from 'jsonwebtoken';
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 @Controller('auth')
 export class AuthController {
@@ -16,11 +19,10 @@ export class AuthController {
   async googleCallback(@Req() req, @Res() res) {
     const user = req.user;
 
-    const googleId = user.googleid;
-    const method = user.method;
+    const googleId = user.googleId;
 
-    if (!googleId || !method) {
-      return res.redirect('http://localhost:5173/');
+    if (!googleId) {
+      res.redirect(`${process.env.FRONTEND}`);
     }
 
     const token = jwt.sign(
@@ -28,10 +30,8 @@ export class AuthController {
       process.env.SECRET,
       { expiresIn: 86400 },
     );
-    return res.redirect(
-     `${`http://localhost:5173/`}/?userid=${token}&method=${method},`
+    res.redirect(
+     `${process.env.FRONTEND}?userid=${token}`,
     );
-  }  
+  }
 }
-
-

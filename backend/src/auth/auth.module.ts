@@ -7,7 +7,7 @@ import { GoogleStrategy } from 'src/strategies/google.strategies';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
-  controllers: [AuthController, GoogleStrategy],
-  providers: [AuthService],
+  controllers: [AuthController],
+  providers: [AuthService, GoogleStrategy],
 })
 export class AuthModule {}

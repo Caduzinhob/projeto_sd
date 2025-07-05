@@ -11,14 +11,14 @@ export class AuthService {
 
   async validateUser(profile:any): Promise<User | null> {
     console.log("Validating user with profile:", profile);
-    const { googleId, displayName, emails } = profile;
+    const { id, displayName, emails } = profile;
     const email = emails[0].value;
 
-    let user = await this.userRepository.findOne({ where: { googleId: googleId } });
+    let user = await this.userRepository.findOne({ where: { googleId: id } });
 
     if (!user) {
       user = this.userRepository.create({
-        googleId: googleId,
+        googleId: id,
         name: displayName,
         email: email,
       });
