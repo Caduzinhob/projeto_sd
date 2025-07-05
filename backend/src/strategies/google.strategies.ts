@@ -7,7 +7,6 @@ import * as dotevn from 'dotenv';
 dotevn.config();
 
 @Injectable()
-@Controller()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(private readonly authService: AuthService) {
     super({

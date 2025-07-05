@@ -6,7 +6,7 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
   const handleNavigation = () => {
-    window.location.href = "http://localhost:3000/auth/google";
+    window.location.href = `${import.meta.env.VITE_BACKEND}auth/google` ;
   }
 
   return (
