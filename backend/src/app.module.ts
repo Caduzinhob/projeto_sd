@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { AgentsModule } from './agents/agents.module';
 
 
 @Module({
@@ -16,7 +17,7 @@ import { AuthModule } from './auth/auth.module';
     database: process.env.DB_NAME || 'banco_dados',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true,
-  }), UserModule, AuthModule],
+  }), UserModule, AuthModule, AgentsModule],
   controllers: [AppController],
   providers: [AppService],
 })
