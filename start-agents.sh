@@ -50,9 +50,9 @@ run_agent "agent1-ia" 5000
 run_agent "agent2-ia" 5001
 
 echo ""
-echo "🎉 Agentes iniciados com sucesso!"
-echo "📊 Agente 1: http://localhost:5000"
-echo "📊 Agente 2: http://localhost:5001"
+echo "Agentes iniciados com sucesso!"
+echo "Agente 1: http://localhost:5000"
+echo "Agente 2: http://localhost:5001"
 echo ""
 echo "Para parar os agentes, pressione Ctrl+C"
 echo ""
