@@ -25,6 +25,17 @@ export class AgentsController {
     return this.agentsService.processData(body.text);
   }
 
+  @Post('financial-analysis')
+  async financialAnalysis(@Body() body: { 
+    monthly_income?: number;
+    monthly_expenses?: number;
+    total_savings?: number;
+    total_debt?: number;
+    text?: string;
+  }) {
+    return this.agentsService.financialAnalysis(body);
+  }
+
   @Get('health')
   async getAgentsHealth() {
     return this.agentsService.getAgentsHealth();
