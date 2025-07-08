@@ -1,224 +1,149 @@
-# Sistema de Agentes de IA - Arquitetura Distribuída
+# Sistema de Agentes de IA com Análise Financeira
 
-Este projeto implementa um sistema de agentes inteligentes com arquitetura distribuída, microserviços e comunicação entre agentes.
+Este projeto implementa um sistema completo de agentes de IA que fornecem análises de texto, cálculos estatísticos e **dicas financeiras personalizadas**.
 
-## 🏗️ Arquitetura
+##  Funcionalidades
 
-- **Frontend**: React + TypeScript + React Router
-- **Backend**: NestJS + TypeScript + PostgreSQL
-- **Agente 1**: Python Flask (Análise de Texto)
-- **Agente 2**: Python Flask (Processamento Estatístico)
-- **Containerização**: Docker + Docker Compose
+### Análise de Texto
+- Análise detalhada de textos com métricas estatísticas
+- Colaboração entre agentes para análise mais profunda
+- Predições baseadas em IA
 
-## 📋 Pré-requisitos
+### Cálculos Estatísticos
+- Soma, média, mediana e desvio padrão
+- Processamento de arrays numéricos
+- Resultados formatados e organizados
 
-- Node.js 18+
-- Python 3.10+
-- Docker e Docker Compose
-- PostgreSQL (opcional, já incluído no docker-compose)
+### **NOVA: Análise Financeira**
+- **Dados Financeiros**: Insira sua renda, despesas, poupanças e dívidas
+- **Descrição Textual**: Descreva sua situação financeira
+- **Dicas Personalizadas**: Receba conselhos específicos baseados em IA
+- **Métricas Financeiras**: Análise de indicadores como taxa de poupança, ratio de despesas, etc.
 
-## 🚀 Instalação e Execução
+## Arquitetura
 
-### Opção 1: Docker Compose (Recomendado)
+### Backend (NestJS)
+- **Porta**: 3000
+- **Agentes**: 
+  - Agent1-IA (Porta 5000): Análise de texto
+  - Agent2-IA (Porta 5001): Cálculos estatísticos
+  - **Finance Agent (Porta 5002)**: Análise financeira
 
-1. **Clone o repositório e navegue até a pasta:**
-   ```bash
-   cd projeto
-   ```
+### Frontend (React + TypeScript)
+- **Porta**: 5173
+- Interface moderna e responsiva
+- Cards organizados para resultados
+- Formulários intuitivos para dados financeiros
 
-2. **Execute todos os serviços:**
-   ```bash
-   docker-compose up --build
-   ```
+## Instalação e Execução
 
-3. **Acesse as aplicações:**
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:3000
-   - Agente 1: http://localhost:5000
-   - Agente 2: http://localhost:5001
-
-### Opção 2: Execução Manual
-
-#### 1. Backend
+### 1. Instalar Dependências
 ```bash
 cd backend
 npm install
+
+cd frontend
+npm install
+```
+
+### 2. Iniciar Agentes de IA
+```bash
+chmod +x start-agents.sh
+./start-agents.sh
+```
+
+### 3. Iniciar Backend
+```bash
+cd backend
 npm run start:dev
 ```
 
-#### 2. Agente 1
-```bash
-cd agent1-ia
-python -m venv venv
-# Windows
-venv\Scripts\activate
-# Linux/Mac
-source venv/bin/activate
-pip install -r requirements.txt
-python main.py
-```
-
-#### 3. Agente 2
-```bash
-cd agent2-ia
-python -m venv venv
-# Windows
-venv\Scripts\activate
-# Linux/Mac
-source venv/bin/activate
-pip install -r requirements.txt
-python main.py
-```
-
-#### 4. Frontend
+### 4. Iniciar Frontend
 ```bash
 cd frontend
-npm install
 npm run dev
 ```
 
-## 🔧 Configuração
+## Como Usar a Análise Financeira
 
-### Variáveis de Ambiente
+### Opção 1: Dados Numéricos
+1. Acesse a seção "Análise Financeira"
+2. Preencha os campos:
+   - **Renda Mensal**: Seu salário ou renda mensal
+   - **Despesas Mensais**: Total de gastos mensais
+   - **Total de Poupanças**: Dinheiro guardado
+   - **Total de Dívidas**: Empréstimos, cartões, etc.
+3. Clique em "Obter Dicas Financeiras"
 
-Crie um arquivo `.env` na raiz do projeto:
+### Opção 2: Descrição Textual
+1. Na mesma seção, use o campo de texto
+2. Descreva sua situação financeira
+3. Exemplo: "Tenho dificuldade para economizar, gasto muito com cartão de crédito"
+4. Clique em "Obter Dicas Financeiras"
+
+### Resultados Esperados
+- **Métricas Financeiras**: Taxa de poupança, ratio de despesas, etc.
+- **Conselhos Personalizados**: Dicas específicas baseadas em IA
+- **Dicas Gerais**: Recomendações práticas para melhorar suas finanças
+
+## Exemplo de Uso
+
+### Input:
+```json
+{
+  "monthly_income": 5000,
+  "monthly_expenses": 3500,
+  "total_savings": 8000,
+  "total_debt": 12000
+}
+```
+
+### Output:
+- **Taxa de Poupança**: 30%
+- **Ratio de Despesas**: 70%
+- **Ratio de Dívidas**: 240%
+- **Meses de Fundo de Emergência**: 2.3
+
+### Dicas Geradas:
+1. Considere consolidar dívidas com taxas menores
+2. Não gaste mais que 50% da sua renda em necessidades básicas
+3. Automatize suas economias mensais
+
+## Configuração de Variáveis de Ambiente
+
+Crie um arquivo `.env` no backend:
 
 ```env
-# Backend
-DB_HOST=localhost
-DB_PORT=5432
-DB_USERNAME=postgres
-DB_PASSWORD=1695
-DB_NAME=banco_dados
-
-# Agentes
 AGENT1_URL=http://localhost:5000
 AGENT2_URL=http://localhost:5001
-
-# Frontend
-VITE_BACKEND=http://localhost:3000/
+FINANCE_AGENT_URL=http://localhost:5002
 ```
 
-## 📡 Endpoints da API
+## Interface
 
-### Backend (NestJS)
-- `POST /agents/analyze` - Análise de texto
-- `POST /agents/predict` - Predições
-- `POST /agents/calculate` - Cálculos estatísticos
-- `POST /agents/process` - Processamento de dados
-- `GET /agents/health` - Status dos agentes
-- `POST /agents/collaborative` - Análise colaborativa
+A interface foi redesenhada com:
+- **Menu moderno** na Home com animações
+- **Cards organizados** para resultados
+- **Seção financeira** dedicada
+- **Dicas visuais** com ícones e cores
+- **Layout responsivo** para mobile
 
-### Agente 1 (Porta 5000)
-- `GET /health` - Status do agente
-- `POST /analyze` - Análise de texto
-- `POST /predict` - Predições
+## Próximos Passos
 
-### Agente 2 (Porta 5001)
-- `GET /health` - Status do agente
-- `POST /process` - Processamento de dados
-- `POST /calculate` - Cálculos estatísticos
+- [ ] Integração com APIs de dados financeiros reais
+- [ ] Histórico de análises
+- [ ] Metas financeiras e acompanhamento
+- [ ] Alertas e notificações
+- [ ] Exportação de relatórios
 
-## 🎯 Funcionalidades
+## Contribuição
 
-### ✅ Requisitos Atendidos
+1. Fork o projeto
+2. Crie uma branch para sua feature
+3. Commit suas mudanças
+4. Push para a branch
+5. Abra um Pull Request
 
-1. **Agentes de IA (10 pts)**
-   - ✅ Mínimo de dois agentes de IA (3 pts)
-   - ✅ Pelo menos um agente containerizado (7 pts)
+## Licença
 
-2. **Comunicação (10 pts)**
-   - ✅ Comunicação entre IAs (4 pts)
-   - ✅ Microserviços (3 pts)
-   - ✅ API na solução (3 pts)
-
-### 🔄 Fluxo de Comunicação
-
-1. **Frontend** → **Backend API** → **Agente 1** → **Agente 2**
-2. **Agente 1** pode se comunicar diretamente com **Agente 2**
-3. **Backend** orquestra as chamadas e retorna resultados consolidados
-
-## 🧪 Testando o Sistema
-
-1. **Faça login** no frontend (http://localhost:5173)
-2. **Acesse a página de Agentes** clicando no botão "Agentes de IA"
-3. **Teste as funcionalidades:**
-   - Análise de texto
-   - Predições
-   - Cálculos estatísticos
-   - Análise colaborativa
-
-## 📁 Estrutura do Projeto
-
-```
-projeto/
-├── frontend/                 # React + TypeScript
-│   ├── src/
-│   │   ├── pages/           # Páginas da aplicação
-│   │   ├── components/      # Componentes reutilizáveis
-│   │   └── services/        # Serviços HTTP
-├── backend/                  # NestJS + TypeScript
-│   ├── src/
-│   │   ├── agents/          # Módulo de agentes
-│   │   ├── auth/            # Autenticação
-│   │   └── user/            # Usuários
-├── agent1-ia/               # Agente Python Flask
-│   ├── main.py
-│   ├── requirements.txt
-│   └── Dockerfile
-├── agent2-ia/               # Agente Python Flask
-│   ├── main.py
-│   ├── requirements.txt
-│   └── Dockerfile
-└── docker-compose.yml       # Orquestração dos containers
-```
-
-## 🔍 Monitoramento
-
-- **Health Check**: `GET /agents/health` verifica o status de todos os agentes
-- **Logs**: Use `docker-compose logs [service]` para ver logs específicos
-- **Métricas**: Os agentes retornam timestamps e informações de processamento
-
-## 🛠️ Desenvolvimento
-
-### Adicionando Novos Agentes
-
-1. Crie uma nova pasta `agent3-ia/`
-2. Implemente o agente com Flask
-3. Adicione ao `docker-compose.yml`
-4. Atualize o `AgentsService` no backend
-
-### Modificando Agentes Existentes
-
-1. Edite os arquivos Python nos agentes
-2. Rebuild: `docker-compose build [agent-name]`
-3. Restart: `docker-compose restart [agent-name]`
-
-## 🚨 Troubleshooting
-
-### Problemas Comuns
-
-1. **Porta já em uso**: Mude as portas no `docker-compose.yml`
-2. **Agentes não respondem**: Verifique `docker-compose logs agent1` ou `agent2`
-3. **Erro de conexão**: Verifique se todos os serviços estão rodando
-
-### Comandos Úteis
-
-```bash
-# Ver logs de todos os serviços
-docker-compose logs
-
-# Ver logs de um serviço específico
-docker-compose logs backend
-
-# Rebuild e restart
-docker-compose down
-docker-compose up --build
-
-# Executar apenas um serviço
-docker-compose up backend
-```
-
-## 📄 Licença
-
-Este projeto é para fins educacionais e de demonstração. 
+Este projeto está sob a licença MIT. 
